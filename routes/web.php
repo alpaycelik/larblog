@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
-Route::get('admin', function () {
-    return view('backend.index');
+Route::group(['prefix' => 'admin'], function (){
+    Route::get('/', 'AdminController@get_index');
+    Route::get('/ayarlar', 'AdminController@get_ayarlar');
 });

@@ -15,7 +15,6 @@
     <link href="/backend/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="/backend/vendors/nprogress/nprogress.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="/backend/build/css/custom.min.css" rel="stylesheet">
 
@@ -54,6 +53,7 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
+                            <li><a href="/admin/ayarlar"><i class="fa fa-cog"></i>Ayarlar</a></li>
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="index.html">Dashboard</a></li>
@@ -290,7 +290,6 @@
 <script src="/backend/vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
 <script src="/backend/vendors/nprogress/nprogress.js"></script>
-
 <!-- Custom Theme Scripts -->
 <script src="/backend/build/js/custom.min.js"></script>
 
