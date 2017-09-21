@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="logo" class="control-label col-md-3 col-sm-3 col-xs-12">Şifre</label>
+                                <label for="logo" class="control-label col-md-3 col-sm-3 col-xs-12">Site Logo</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="file" id="logo" name="logo" class= "form-control col-md-7 col-xs-12">
                                     <input type="hidden" name="eski_logo" value="{{ $ayarlar->logo }}">
@@ -117,6 +117,7 @@
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/messages_tr.min.js"></script>
     <script src="/js/sweetalert2.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('form').validate();
