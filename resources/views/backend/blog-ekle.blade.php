@@ -21,12 +21,13 @@
                                             <input type="file" name="resimler[]" id="resimler" multiple class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
-                                    {{ Form::bsText('baslik', 'Başlık') }}
-                                    {{ Form::bsText('etiketler', 'Etiketler') }}
+                                    {{ Form::bsText('baslik', 'Başlık', '', ['required' => 'required']) }}
+                                    {{ Form::bsText('kisaicerik', 'Kısa Açıklama', '', ['required' => 'required']) }}
+                                    {{ Form::bsText('etiketler', 'Etiketler', '', ['required' => 'required']) }}
                                     <div class="form-group">
                                         <label for="icerik" class="control-label col-md-3 col-sm-3 col-xs-12">İçerik</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <textarea name="icerik" id="icerik" class= "form-control col-md-7 col-xs-12 ckeditor" cols="30" rows="10"></textarea>
+                                            <textarea name="icerik" id="icerik" class= "form-control col-md-7 col-xs-12 ckeditor" cols="30" rows="10" required></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">

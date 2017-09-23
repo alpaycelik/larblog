@@ -108,6 +108,7 @@
                                     <nav>
                                         <ul class="nav nav-pills" id="mainNav">
                                             <li class=""><a href="/">Anasayfa</a></li>
+                                            <li class=""><a href="/blog">Blog</a></li>
                                             <li class=""><a href="/hakkimizda">Hakkımızda</a></li>
                                             <li class=""><a href="/iletisim">Bİze Ulaşin</a></li>
                                         </ul>

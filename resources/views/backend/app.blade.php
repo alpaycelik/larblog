@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Gentelella Alela! | </title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>pFirma Yönetim Paneli</title>
 
     <!-- Bootstrap -->
     <link href="/backend/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
                         <h3>General</h3>
                         <ul class="nav side-menu">
                             <li><a href="/admin/"><i class="fa fa-home"></i>Anasayfa</a></li>
-                            <li><a><i class="fa fa-paper"></i> Blog <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-newspaper-o"></i> Blog <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="/admin/blog">Bloglar</a></li>
                                     <li><a href="/admin/blog/blog-ekle">Blog Ekle</a></li>

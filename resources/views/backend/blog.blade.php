@@ -27,9 +27,6 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @php
-                                        $sira = 1;
-                                    @endphp
                                     @foreach($bloglar as $blog )
                                     <tr>
                                         <td>{{ $blog->created_at }}</td>
@@ -39,15 +36,12 @@
                                         <td>{{ $blog->hit }}</td>
                                         <td>{{ $blog->yorumlar }}</td>
                                         <td>
-                                            <input onclick="sil(this, '{{ $blog->slug }}')" type="button" class="btn btn-danger btn-xs">
+                                            <input onclick="sil(this, '{{ $blog->slug }}');" type="button" value="Sil" class="btn btn-danger btn-xs">
                                         </td>
                                         <td>
                                             <a href="blog/blog-duzenle/{{ $blog->slug }}" class="btn btn-primary btn-xs">Düzenle</a>
                                         </td>
                                     </tr>
-                                    @php
-                                        $sira++;
-                                    @endphp
                                     @endforeach
                                     </tbody>
                                 </table>
@@ -83,22 +77,46 @@
     <script src="/js/sweetalert2.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $('form').ajaxForm({
-                success: function (response) {
-                    swal(
-                        response.baslik,
-                        response.icerik,
-                        response.durum
-                    );
-                    if(response.durum == 'success'){
-                        var form = document.getElementById("form");
-                        var sira = form.elements[2].value();
-                        document.getElementById("datatable-buttons").deleteRow(sira);
+        function sil(r,slug){
+            var sira = r.parentNode.parentNode.rowIndex;
+            swal({
+                title: 'Silmek istediğinizden emin misiniz?',
+                text: 'Sidiğinizde geri dönüşümü olmayacaktır',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'İptal',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil'
+            }).then(function () {
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    type: "post",
+                    url: '',
+                    data: {
+                        'slug': slug,
+                        '_token': CSRF_TOKEN
+                    },
+                    beforeSubmit:function () {
+                        swal({
+                            title: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>',
+                            text: 'Yükleniyor lütfen bekleyiniz...',
+                            showConfirmButton: false
+                        })
+                    },
+                    success: function(response){
+                        if(response.durum == 'success'){
+                            document.getElementById("datatable-buttons").deleteRow(sira);
+                        }
+                        swal(
+                            response.baslik,
+                            response.icerik,
+                            response.durum
+                        );
                     }
-                }
-            });
-        });
+                })
+            })
+        }
     </script>
 
 @endsection
