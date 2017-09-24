@@ -21,6 +21,23 @@
                                             <input type="file" name="resimler[]" id="resimler" multiple class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="icerik" class="control-label col-md-3 col-sm-3 col-xs-12">Kategoriler</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select class="form-control" name="kategori">
+                                                <option value="0">Diğer Kategori</option>
+                                                @foreach($kategoriler as $kategori)
+                                                    <option value="{{ $kategori->id }}">{{ $kategori->ad }}</option>
+                                                    @foreach($kategori->children as $altkategori)
+                                                        <option value="{{ $altkategori->id }}">{{ $kategori->ad }}-->{{ $altkategori->ad }}</option>
+                                                        @foreach($altkategori->children as $altaltkategori)
+                                                            <option value="{{ $altaltkategori->id }}">{{ $kategori->ad }}-->{{ $altkategori->ad }}-->{{ $altaltkategori->ad }}</option>
+                                                        @endforeach
+                                                    @endforeach
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     {{ Form::bsText('baslik', 'Başlık', '', ['required' => 'required']) }}
                                     {{ Form::bsText('kisaicerik', 'Kısa Açıklama', '', ['required' => 'required']) }}
                                     {{ Form::bsText('etiketler', 'Etiketler', '', ['required' => 'required']) }}

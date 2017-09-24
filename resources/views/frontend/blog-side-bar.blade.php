@@ -14,8 +14,20 @@
 
         <h4 class="heading-primary">Categories</h4>
         <ul class="nav nav-list mb-xlg">
-            <li><a href="#">Design (2)</a></li>
-            <li class="active">
+            @foreach($kategoriler as $kategori)
+                <li><a href="{{ $kategori->slug }}">{{ $kategori->ad }}</a></li>
+                <ul>
+                    @foreach($kategori->children as $altkategori)
+                        <li><a href="{{ $kategori->slug }}/{{ $altkategori->slug }}">{{ $altkategori->ad }}</a></li>
+                        <ul>
+                        @foreach($altkategori->children as $altaltkategori)
+                            <li><a href="{{ $kategori->slug }}/{{ $altkategori->slug }}/{{ $altaltkategori->slug }}">{{ $altaltkategori->ad }}</a></li>
+                        @endforeach
+                        </ul>
+                    @endforeach
+                </ul>
+            @endforeach
+            <!--<li class="active">
                 <a href="#">Photos (4)</a>
                 <ul>
                     <li><a href="#">Animals</a></li>
@@ -26,7 +38,7 @@
             </li>
             <li><a href="#">Videos (3)</a></li>
             <li><a href="#">Lifestyle (2)</a></li>
-            <li><a href="#">Technology (1)</a></li>
+            <li><a href="#">Technology (1)</a></li>-->
         </ul>
 
         <div class="tabs mb-xlg">
