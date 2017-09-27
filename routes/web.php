@@ -27,7 +27,10 @@ Route::post('/blog/{slug}', 'HomePostController@post_blog_yorum')->where('slug',
 
 Route::group(['prefix' => 'forum'], function (){
     Route::get('/', 'HomeGetController@get_forum');
+    Route::get('/konu-ekle', 'HomeGetController@get_forum_konu_ekle');
+    Route::post('/konu-ekle', 'HomePostController@post_forum_konu_ekle');
     Route::get('/{slug}', 'HomeGetController@get_forum_liste');
+
 });
 
 

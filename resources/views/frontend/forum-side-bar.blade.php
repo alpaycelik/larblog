@@ -1,12 +1,8 @@
 <div class="col-md-3">
     <aside class="sidebar">
-
-        <form>
             <div class="input-group input-group-lg">
-                <button class="btn btn-primary btn-lg">Yeni Konu Ekle</button>
+                <a href="/forum/konu-ekle"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>  Yeni Konu Ekle</button></a>
             </div>
-        </form>
-
         <hr>
 
         <h4 class="heading-primary">Categories</h4>

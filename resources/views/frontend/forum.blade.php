@@ -37,7 +37,7 @@
                                                     <span class="day">{{ $konu->created_at->formatLocalized('%d') }}</span>
                                                     <span class="month">{{ $konu->created_at->formatLocalized('%b') }}</span>
                                             </div>
-                                            <h2><a href="#">{{ $konu->baslik }}</a></h2>
+                                            <h2><a href="/forum/{{ $anabaslik->slug }}/{{ $konu->slug }}">{{ $konu->baslik }}</a></h2>
                                             <div class="post-meta">
                                                 <span><i class="fa fa-user"></i>By <a href="#">{{ $konu->user->name }}</a></span>
                                                 <span><i class="fa fa-tag"></i>
