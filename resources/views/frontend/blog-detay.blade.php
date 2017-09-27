@@ -38,10 +38,10 @@
                                 @endforeach
                             </div>
                         </div>
-
+                        @php(setlocale(LC_TIME, "turkish"))
                         <div class="post-date">
-                            <span class="day">10</span>
-                            <span class="month">Jan</span>
+                            <span class="day">{{ $blog->created_at->formatLocalized('%d') }}</span>
+                            <span class="month">{{ $blog->created_at->formatLocalized('%b') }}</span>
                         </div>
 
                         <div class="post-content">
@@ -87,6 +87,8 @@
                                 <h3 class="heading-primary"><i class="fa fa-comments"></i>Comments (3)</h3>
 
                                 <ul class="comments">
+                                    <li id="yorumlar"></li>
+                                    @foreach($blog->yorumlar->where('ust_yorum', '0') as $yorum)
                                     <li>
                                         <div class="comment">
                                             <div class="img-thumbnail">
@@ -95,17 +97,24 @@
                                             <div class="comment-block">
                                                 <div class="comment-arrow"></div>
                                                 <span class="comment-by">
-																<strong>John Doe</strong>
+																<strong>
+                                                                    @if($yorum->kullanici_id > 0)
+                                                                        {{ $yorum->user->name }}
+                                                                    @else
+                                                                        {{ $yorum->isim }}
+                                                                    @endif
+                                                                </strong>
 																<span class="pull-right">
-																	<span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
+																	<span> <a onclick="altyorum({{ $yorum->id }});"><i class="fa fa-reply"></i> Cevapla</a></span>
 																</span>
 															</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim ornare nisi, vitae mattis nulla ante id dui.</p>
-                                                <span class="date pull-right">November 12, 2017 at 1:38 pm</span>
+                                                <p>{{ $yorum->icerik }}</p>
+                                                <span class="date pull-right">{{ $yorum->created_at->diffForHumans() }}</span>
                                             </div>
                                         </div>
 
                                         <ul class="comments reply">
+                                            @foreach($yorum->children as $altyorum)
                                             <li>
                                                 <div class="comment">
                                                     <div class="img-thumbnail">
@@ -114,103 +123,58 @@
                                                     <div class="comment-block">
                                                         <div class="comment-arrow"></div>
                                                         <span class="comment-by">
-																		<strong>John Doe</strong>
-																		<span class="pull-right">
-																			<span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
-																		</span>
+																		<strong>
+                                                                            @if($altyorum->kullanici_id > 0)
+                                                                                {{ $altyorum->user->name }}
+                                                                            @else
+                                                                                {{ $altyorum->isim }}
+                                                                            @endif
+                                                                        </strong>
 																	</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                                        <span class="date pull-right">November 12, 2017 at 1:38 pm</span>
+                                                        <p>{{ $altyorum->icerik }}</p>
+                                                        <span class="date pull-right">{{ $altyorum->created_at->diffForHumans() }}</span>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="comment">
-                                                    <div class="img-thumbnail">
-                                                        <img class="avatar" alt="" src="/frontend/img/avatars/avatar-4.jpg">
-                                                    </div>
-                                                    <div class="comment-block">
-                                                        <div class="comment-arrow"></div>
-                                                        <span class="comment-by">
-																		<strong>John Doe</strong>
-																		<span class="pull-right">
-																			<span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
-																		</span>
-																	</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                                        <span class="date pull-right">November 12, 2017 at 1:38 pm</span>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </li>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="img-thumbnail">
-                                                <img class="avatar" alt="" src="/frontend/img/avatars/avatar.jpg">
-                                            </div>
-                                            <div class="comment-block">
-                                                <div class="comment-arrow"></div>
-                                                <span class="comment-by">
-																<strong>John Doe</strong>
-																<span class="pull-right">
-																	<span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
-																</span>
-															</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <span class="date pull-right">November 12, 2017 at 1:38 pm</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="img-thumbnail">
-                                                <img class="avatar" alt="" src="/frontend/img/avatars/avatar.jpg">
-                                            </div>
-                                            <div class="comment-block">
-                                                <div class="comment-arrow"></div>
-                                                <span class="comment-by">
-																<strong>John Doe</strong>
-																<span class="pull-right">
-																	<span> <a href="#"><i class="fa fa-reply"></i> Reply</a></span>
-																</span>
-															</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <span class="date pull-right">November 12, 2017 at 1:38 pm</span>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    @endforeach
                                 </ul>
 
                             </div>
 
                             <div class="post-block post-leave-comment">
-                                <h3 class="heading-primary">Leave a comment</h3>
+                                <h3 class="heading-primary">Yorum Yap</h3>
 
-                                <form action="" method="post">
+                                <form action="" method="post" id="form">
+                                    {{ csrf_field() }}
+                                    <div id="altyorum"></div>
+                                    @if(!Auth::check())
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-md-6">
-                                                <label>Your name *</label>
-                                                <input type="text" value="" maxlength="100" class="form-control" name="name" id="name">
+                                                <label>Adınız *</label>
+                                                <input type="text" value="" maxlength="100" class="form-control" name="isim" id="name">
                                             </div>
                                             <div class="col-md-6">
-                                                <label>Your email address *</label>
-                                                <input type="email" value="" maxlength="100" class="form-control" name="email" id="email">
+                                                <label>E-mail adresiniz *</label>
+                                                <input type="email" value="" maxlength="100" class="form-control" name="mail" id="mail">
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <label>Comment *</label>
-                                                <textarea maxlength="5000" rows="10" class="form-control" name="comment" id="comment"></textarea>
+                                                <label>Mesajınız *</label>
+                                                <textarea maxlength="5000" rows="10" class="form-control" name="icerik" id="comment"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <input type="submit" value="Post Comment" class="btn btn-primary btn-lg" data-loading-text="Loading...">
+                                            <input type="submit" value="Yorum Gönder" class="btn btn-primary btn-lg" data-loading-text="Loading...">
                                         </div>
                                     </div>
                                 </form>
@@ -229,8 +193,57 @@
 </div>
 @endsection
 @section('js')
+    <script src="/js/jquery.form.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/messages_tr.min.js"></script>
+    <script src="/js/sweetalert2.min.js"></script>
 
+    <script>
+        function altyorum(id) {
+            var hidden = '<input type="hidden" value="'+ id +'" name="ust_yorum">';
+            document.getElementById('altyorum').innerHTML = hidden;
+        }
+        $(document).ready(function () {
+            $('form').validate();
+            $('form').ajaxForm({
+                beforeSubmit:function () {
+
+                },
+                success:function (response) {
+                    swal(
+                        response.baslik,
+                        response.icerik,
+                        response.durum
+                    );
+                    if(response.durum == 'success'){
+                        var isim = document.getElementById('name').value;
+                        var icerik = document.getElementById('comment').value;
+                        var mesaj = '<div class="comment">'+
+                                '<div class="img-thumbnail">'+
+                                '<img class="avatar" alt="" src="/frontend/img/avatars/avatar-2.jpg">'+
+                                '</div>'+
+                                '<div class="comment-block">'+
+                                '<div class="comment-arrow">'+
+                                '</div>'+
+                                '<span class="comment-by">'+
+                                '<strong>' + isim + '</strong>'+
+                                '<span class="pull-right">'+
+                                '<span>'+
+                                '<a href="#"><i class="fa fa-reply"></i> Reply</a>'+
+                                '</span>'+
+                                '</span>'+
+                                '</span>'+
+                                '<p>' + icerik + '</p>'+
+                                '<span class="data pull-right">Şimdi</span>'+
+                                '</div>'+
+                                '</div>';
+                        document.getElementById('yorumlar').innerHTML = mesaj;
+                    }
+                }
+            });
+        });
+    </script>
 @endsection
 @section('css')
-
+    <link rel="stylesheet" href="/css/sweetalert2.min.css">
 @endsection

@@ -62,6 +62,13 @@
                                     <li><a href="/admin/blog/kategori-ekle">Kategori Ekle</a></li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-newspaper-o"></i> Forum <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="/admin/forum">Forumlar</a></li>
+                                    <li><a href="/admin/forum/ana-basliklar">Forumlar</a></li>
+                                    <li><a href="/admin/forum/ana-baslik-ekle">Forum Ekle</a></li>
+                                </ul>
+                            </li>
                             <li><a href="/admin/hakkimizda"><i class="fa fa-book"></i>Hakkımızda</a></li>
                             <li><a href="/admin/ayarlar"><i class="fa fa-cog"></i>Ayarlar</a></li>
                         </ul>

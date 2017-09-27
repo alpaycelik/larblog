@@ -38,22 +38,22 @@
                                     @endforeach
                                 </div>
                             </div>
-
+                            @php(setlocale(LC_TIME, "turkish"))
                             <div class="post-date">
-                                <span class="day">10</span>
-                                <span class="month">Jan</span>
+                                <span class="day">{{ $blog->created_at->formatLocalized('%d') }}</span>
+                                <span class="month">{{ $blog->created_at->formatLocalized('%b') }}</span>
                             </div>
 
                             <div class="post-content">
 
-                                <h2><a href="/blog/{{ $blog->slug }}">{{ $blog->baslik }}</a></h2>
+                                <h2><a href="/blog/@if(isset($blog->parent))@php($ustkategori=$blog->parent)@if(isset($ustkategori->parent))@php($ustustkategori=$ustkategori->parent)@if(isset($ustustkategori->parent)){{ $ustustkategori->parent->slug }}/@endif{{ $ustkategori->parent->slug }}/@endif{{ $blog->parent->slug }}/@endif{{ $blog->slug }}">{{ $blog->baslik }}</a></h2>
                                 <p>{{ $blog->kisaicerik }}</p>
 
                                 <div class="post-meta">
-                                    <span><i class="fa fa-user"></i> By <a href="#">John Doe</a> </span>
+                                    <span><i class="fa fa-user"></i> By <a href="/blog/yazar/{{ $blog->user->slug }}-{{ $blog->user->id }}">{{ $blog->user->name }}</a> </span>
                                     <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
-                                    <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
-                                    <a href="/blog/{{ $blog->slug }}" class="btn btn-xs btn-primary pull-right">Devamı...</a>
+                                    <span><i class="fa fa-comments"></i> <a href="#">{{ $blog->yorumlar->count() }} Yorum</a></span>
+                                    <a href="/blog/@if(isset($blog->parent))@php($ustkategori=$blog->parent)@if(isset($ustkategori->parent))@php($ustustkategori=$ustkategori->parent)@if(isset($ustustkategori->parent)){{ $ustustkategori->parent->slug }}/@endif{{ $ustkategori->parent->slug }}/@endif{{ $blog->parent->slug }}/@endif{{ $blog->slug }}" class="btn btn-xs btn-primary pull-right">Devamı...</a>
                                 </div>
 
                             </div>

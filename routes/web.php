@@ -15,13 +15,24 @@ Route::get('/', 'HomeGetController@get_index');
 Route::get('/index', 'HomeGetController@get_index_yonlendir');
 Route::get('/home', 'HomeGetController@get_index_yonlendir');
 Route::get('/anasayfa', 'HomeGetController@get_index_yonlendir');
+Route::get('/giris-yap', 'HomeGetController@get_giris_yap');
+Route::get('/cikis-yap', 'HomeGetController@get_cikis_yap');
 Route::get('/iletisim', 'HomeGetController@get_iletisim');
 Route::get('/hakkimizda', 'HomeGetController@get_hakkimizda');
 Route::get('/blog', 'HomeGetController@get_blog');
+Route::get('/blog/yazar/{yazar}', 'HomeGetController@get_blog_yazar');
 Route::get('/blog/{slug}', 'HomeGetController@get_blog_icerik')->where('slug', '^[a-zA-Z0-9-_\/]+$');
+Route::post('/blog/{slug}', 'HomePostController@post_blog_yorum')->where('slug', '^[a-zA-Z0-9-_\/]+$');
+
+Route::group(['prefix' => 'forum'], function (){
+    Route::get('/', 'HomeGetController@get_forum');
+    // Route::post('/', 'HomePostController@post_forum');
+});
+
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'Admin'], function (){
+
     Route::get('/', 'AdminGetController@get_index');
     Route::get('/ayarlar', 'AdminGetController@get_ayarlar');
     Route::post('/ayarlar', 'AdminPostController@post_ayarlar');
@@ -40,8 +51,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'Admin'], function (){
         Route::get('/kategori', 'AdminGetController@get_kategoriler');
         Route::post('/kategori', 'AdminPostController@post_kategori_sil');
     });
+
+    Route::group(['prefix' => 'forum'], function (){
+        Route::get('/', 'AdminGetController@get_ana_basliklar');
+        Route::get('/ana-baslik-ekle', 'AdminGetController@get_anabaslik_ekle');
+        Route::post('/ana-baslik-ekle', 'AdminPostController@post_anabaslik_ekle');
+    });
+
+
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+ // Route::get('/home', 'HomeController@index')->name('home');

@@ -14,20 +14,8 @@
 
         <h4 class="heading-primary">Categories</h4>
         <ul class="nav nav-list mb-xlg">
-            @foreach($kategoriler as $kategori)
-                <li><a href="/blog/{{ $kategori->slug }}">{{ $kategori->ad }}</a></li>
-                <ul>
-                    @foreach($kategori->children as $altkategori)
-                        <li><a href="/blog/{{ $kategori->slug }}/{{ $altkategori->slug }}">{{ $altkategori->ad }}</a></li>
-                        <ul>
-                        @foreach($altkategori->children as $altaltkategori)
-                            <li><a href="/blog/{{ $kategori->slug }}/{{ $altkategori->slug }}/{{ $altaltkategori->slug }}">{{ $altaltkategori->ad }}</a></li>
-                        @endforeach
-                        </ul>
-                    @endforeach
-                </ul>
-            @endforeach
-            <!--<li class="active">
+            <li><a href="#">Design (2)</a></li>
+            <li class="active">
                 <a href="#">Photos (4)</a>
                 <ul>
                     <li><a href="#">Animals</a></li>
@@ -38,7 +26,7 @@
             </li>
             <li><a href="#">Videos (3)</a></li>
             <li><a href="#">Lifestyle (2)</a></li>
-            <li><a href="#">Technology (1)</a></li>-->
+            <li><a href="#">Technology (1)</a></li>
         </ul>
 
         <div class="tabs mb-xlg">
@@ -53,14 +41,14 @@
                             <div class="post-image">
                                 <div class="img-thumbnail">
                                     <a href="blog-post.html">
-                                        <img src="/frontend/img/blog/blog-thumb-1.jpg" alt="">
+                                        <img src="img/blog/blog-thumb-1.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <a href="blog-post.html">Nullam Vitae Nibh Un Odiosters</a>
                                 <div class="post-meta">
-                                    Jan 10, 2017
+                                    Jan 10, 2015
                                 </div>
                             </div>
                         </li>
@@ -68,14 +56,14 @@
                             <div class="post-image">
                                 <div class="img-thumbnail">
                                     <a href="blog-post.html">
-                                        <img src="/frontend/img/blog/blog-thumb-2.jpg" alt="">
+                                        <img src="img/blog/blog-thumb-2.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <a href="blog-post.html">Vitae Nibh Un Odiosters</a>
                                 <div class="post-meta">
-                                    Jan 10, 2017
+                                    Jan 10, 2015
                                 </div>
                             </div>
                         </li>
@@ -83,14 +71,14 @@
                             <div class="post-image">
                                 <div class="img-thumbnail">
                                     <a href="blog-post.html">
-                                        <img src="/frontend/img/blog/blog-thumb-3.jpg" alt="">
+                                        <img src="img/blog/blog-thumb-3.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <a href="blog-post.html">Odiosters Nullam Vitae</a>
                                 <div class="post-meta">
-                                    Jan 10, 2017
+                                    Jan 10, 2015
                                 </div>
                             </div>
                         </li>
@@ -102,14 +90,14 @@
                             <div class="post-image">
                                 <div class="img-thumbnail">
                                     <a href="blog-post.html">
-                                        <img src="/frontend/img/blog/blog-thumb-2.jpg" alt="">
+                                        <img src="img/blog/blog-thumb-2.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <a href="blog-post.html">Vitae Nibh Un Odiosters</a>
                                 <div class="post-meta">
-                                    Jan 10, 2017
+                                    Jan 10, 2015
                                 </div>
                             </div>
                         </li>
@@ -117,14 +105,14 @@
                             <div class="post-image">
                                 <div class="img-thumbnail">
                                     <a href="blog-post.html">
-                                        <img src="/frontend/img/blog/blog-thumb-3.jpg" alt="">
+                                        <img src="img/blog/blog-thumb-3.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <a href="blog-post.html">Odiosters Nullam Vitae</a>
                                 <div class="post-meta">
-                                    Jan 10, 2017
+                                    Jan 10, 2015
                                 </div>
                             </div>
                         </li>
@@ -132,14 +120,14 @@
                             <div class="post-image">
                                 <div class="img-thumbnail">
                                     <a href="blog-post.html">
-                                        <img src="/frontend/img/blog/blog-thumb-1.jpg" alt="">
+                                        <img src="img/blog/blog-thumb-1.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
                             <div class="post-info">
                                 <a href="blog-post.html">Nullam Vitae Nibh Un Odiosters</a>
                                 <div class="post-meta">
-                                    Jan 10, 2017
+                                    Jan 10, 2015
                                 </div>
                             </div>
                         </li>
@@ -152,5 +140,6 @@
 
         <h4 class="heading-primary">About Us</h4>
         <p>Nulla nunc dui, tristique in semper vel, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. Nulla nunc dui, tristique in semper vel. Nam dolor ligula, faucibus id sodales in, auctor fringilla libero. </p>
+
     </aside>
 </div>
