@@ -21,12 +21,13 @@ Route::get('/iletisim', 'HomeGetController@get_iletisim');
 Route::get('/hakkimizda', 'HomeGetController@get_hakkimizda');
 Route::get('/blog', 'HomeGetController@get_blog');
 Route::get('/blog/yazar/{yazar}', 'HomeGetController@get_blog_yazar');
+Route::get('/blog/etiket/{etiket}', 'HomeGetController@get_blog_etiket');
 Route::get('/blog/{slug}', 'HomeGetController@get_blog_icerik')->where('slug', '^[a-zA-Z0-9-_\/]+$');
 Route::post('/blog/{slug}', 'HomePostController@post_blog_yorum')->where('slug', '^[a-zA-Z0-9-_\/]+$');
 
 Route::group(['prefix' => 'forum'], function (){
     Route::get('/', 'HomeGetController@get_forum');
-    // Route::post('/', 'HomePostController@post_forum');
+    Route::get('/{slug}', 'HomeGetController@get_forum_liste');
 });
 
 

@@ -51,7 +51,13 @@
 
                                 <div class="post-meta">
                                     <span><i class="fa fa-user"></i> By <a href="/blog/yazar/{{ $blog->user->slug }}-{{ $blog->user->id }}">{{ $blog->user->name }}</a> </span>
-                                    <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
+                                    <span><i class="fa fa-tag"></i>
+                                        @php($e = $blog->etiketler)
+                                        @php($etiketler = explode(',', $e))
+                                        @foreach($etiketler as $etiket)
+                                              <a href="/blog/etiket/{{ str_slug($etiket) }}">{{ $etiket }}</a>
+                                        @endforeach
+                                    </span>
                                     <span><i class="fa fa-comments"></i> <a href="#">{{ $blog->yorumlar->count() }} Yorum</a></span>
                                     <a href="/blog/@if(isset($blog->parent))@php($ustkategori=$blog->parent)@if(isset($ustkategori->parent))@php($ustustkategori=$ustkategori->parent)@if(isset($ustustkategori->parent)){{ $ustustkategori->parent->slug }}/@endif{{ $ustkategori->parent->slug }}/@endif{{ $blog->parent->slug }}/@endif{{ $blog->slug }}" class="btn btn-xs btn-primary pull-right">Devamı...</a>
                                 </div>
