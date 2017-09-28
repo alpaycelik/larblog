@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ForumKonu;
+use App\ForumYorum;
 use App\Yorum;
 use Carbon\Carbon;
 use Validator;
@@ -57,6 +58,39 @@ class HomePostController extends HomeController
         }
         catch (\Exception $e){
             return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Kayıt işlemi hatalı..!', 'hata' => $e]);
+        }
+    }
+
+    public function post_forum_yorum($ana_konu, $slug, Request $request){
+        if(Auth::check()){
+            $validator = Validator::make($request->all(), [
+                'icerik' => 'required'
+            ]);
+        }
+        else{
+            return redirect('/login');
+        }
+        if($validator->fails()){
+            return response(['durum' => 'error', 'baslik' => 'Hatalı', 'icerik' => 'Form hatası..!']);
+        }
+        $request->merge(['kullanici_id' => Auth::user()->id, 'forum' => $slug]);
+        ForumYorum::create($request->all());
+        return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Yorum başarıyla yapıldı.']);
+    }
+
+    public function post_forum_konu_sil(Request $request){
+        $durum = $request->durum;
+        if($durum == 'sil'){
+            try {
+                ForumKonu::where('id', $request->id)->delete();
+                return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Silme işlemi başarılı.']);
+            }
+            catch (\Exception $e){
+                return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Silme işlemi başarısız..!', 'hata' => $e]);
+            }
+        }
+        elseif($durum == 'gizle'){
+
         }
     }
 

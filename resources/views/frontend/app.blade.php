@@ -11,7 +11,7 @@
     <meta name="keywords" content="HTML5 Template" />
     <meta name="description" content="Porto - Responsive HTML5 Template">
     <meta name="author" content="okler.net">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="/frontend/img/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/frontend/img/apple-touch-icon.png">

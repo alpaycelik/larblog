@@ -18,7 +18,7 @@ class ForumKonu extends Model
     }
 
     public function yorumlar(){
-        return $this->hasMany('App\ForumYorum', 'forum', 'id');
+        return $this->hasMany('App\ForumYorum', 'forum', 'slug');
     }
 
 }

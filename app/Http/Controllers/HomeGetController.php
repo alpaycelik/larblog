@@ -80,8 +80,9 @@ class HomeGetController extends HomeController
     }
 
     public function get_forum_liste($slug){
+        $anabasliklar = Anabaslik::all();
         $anabaslik = Anabaslik::where('slug', $slug)->first();
-        return view('frontend.forum-liste')->with('anabaslik', $anabaslik);
+        return view('frontend.forum-liste')->with('anabaslik', $anabaslik)->with('anabasliklar', $anabasliklar);
     }
 
     public function get_forum_konu_ekle(){
@@ -90,8 +91,9 @@ class HomeGetController extends HomeController
     }
 
     public function get_forum_detay($ana_konu, $slug){
+        $anabasliklar = Anabaslik::all();
         $forum = ForumKonu::where('slug', $slug)->first();
-        return view('frontend.forum-detay')->with('forum', $forum);
+        return view('frontend.forum-detay')->with('forum', $forum)->with('anabasliklar', $anabasliklar);
     }
 
 }

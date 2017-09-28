@@ -17,7 +17,7 @@ class ForumYorumlarTablosuOlustur extends Migration
             $table->increments('id');
             $table->integer('ust_yorum')->default(0);
             $table->integer('kullanici_id');
-            $table->integer('forum');
+            $table->string('forum');
             $table->longText('icerik');
             $table->timestamps();
         });

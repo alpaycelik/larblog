@@ -1,25 +1,21 @@
 <div class="col-md-3">
     <aside class="sidebar">
+        @if(Auth::check() && Auth::user()->yetki() > 0)
+        <div class="input-group input-group-lg">
+            <a href="/admin/forum/ana-baslik-ekle"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>  Forum Ekle</button></a>
+        </div>
+        <hr>
+        @endif
             <div class="input-group input-group-lg">
                 <a href="/forum/konu-ekle"><button class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>  Yeni Konu Ekle</button></a>
             </div>
         <hr>
 
-        <h4 class="heading-primary">Categories</h4>
+        <h4 class="heading-primary">Forumlar</h4>
         <ul class="nav nav-list mb-xlg">
-            <li><a href="#">Design (2)</a></li>
-            <li class="active">
-                <a href="#">Photos (4)</a>
-                <ul>
-                    <li><a href="#">Animals</a></li>
-                    <li class="active"><a href="#">Business</a></li>
-                    <li><a href="#">Sports</a></li>
-                    <li><a href="#">People</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Videos (3)</a></li>
-            <li><a href="#">Lifestyle (2)</a></li>
-            <li><a href="#">Technology (1)</a></li>
+            @foreach($anabasliklar as $baslik)
+            <li><a href="/forum/{{ $baslik->slug }}">{{ $baslik->baslik }}</a></li>
+            @endforeach
         </ul>
 
         <div class="tabs mb-xlg">

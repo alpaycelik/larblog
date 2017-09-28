@@ -127,29 +127,13 @@
                                     </li>
                                     @endforeach
                                 </ul>
-
                             </div>
 
                             <div class="post-block post-leave-comment">
                                 <h3 class="heading-primary">Yorum Yap</h3>
-
                                 <form action="" method="post" id="form">
                                     {{ csrf_field() }}
                                     <div id="altyorum"></div>
-                                    @if(!Auth::check())
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-6">
-                                                <label>Adınız *</label>
-                                                <input type="text" value="" maxlength="100" class="form-control" name="isim" id="name">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>E-mail adresiniz *</label>
-                                                <input type="email" value="" maxlength="100" class="form-control" name="mail" id="mail">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endif
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-md-12">
@@ -168,12 +152,9 @@
 
                         </div>
                     </article>
-
                 </div>
             </div>
-
             @include('frontend.forum-side-bar')
-
         </div>
     </div>
 </div>
