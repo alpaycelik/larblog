@@ -34,8 +34,8 @@
                                         <div class="post-content">
                                             <div class="post-date">
                                                 @php(setlocale(LC_TIME, "turkish"))
-                                                    <span class="day">{{ $konu->created_at->formatLocalized('%d') }}</span>
-                                                    <span class="month">{{ $konu->created_at->formatLocalized('%b') }}</span>
+                                                <span class="day">{{ $konu->created_at->formatLocalized('%d') }}</span>
+                                                <span class="month">{{ $konu->created_at->formatLocalized('%b') }}</span>
                                             </div>
                                             <h2><a href="/forum/{{ $anabaslik->slug }}/{{ $konu->slug }}">{{ $konu->baslik }}</a></h2>
                                             <div class="post-meta">

@@ -89,4 +89,9 @@ class HomeGetController extends HomeController
         return view('frontend.konu-ekle')->with('anabasliklar', $anabasliklar);
     }
 
+    public function get_forum_detay($ana_konu, $slug){
+        $forum = ForumKonu::where('slug', $slug)->first();
+        return view('frontend.forum-detay')->with('forum', $forum);
+    }
+
 }

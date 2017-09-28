@@ -30,7 +30,7 @@ Route::group(['prefix' => 'forum'], function (){
     Route::get('/konu-ekle', 'HomeGetController@get_forum_konu_ekle');
     Route::post('/konu-ekle', 'HomePostController@post_forum_konu_ekle');
     Route::get('/{slug}', 'HomeGetController@get_forum_liste');
-
+    Route::get('/{ana_konu}/{slug}', 'HomeGetController@get_forum_detay');
 });
 
 

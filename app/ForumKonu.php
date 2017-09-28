@@ -17,4 +17,8 @@ class ForumKonu extends Model
         return $this->hasOne('App\User', 'id', 'yazar');
     }
 
+    public function yorumlar(){
+        return $this->hasMany('App\ForumYorum', 'forum', 'id');
+    }
+
 }
