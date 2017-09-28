@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ForumKonu extends Model
 {
     protected $table = 'forum_konular';
-    protected $fillable = ['baslik', 'icerik', 'yazar', 'etiketler', 'slug', 'ana_baslik'];
+    protected $fillable = ['baslik', 'icerik', 'yazar', 'etiketler', 'slug', 'ana_baslik', 'goster' ,'sabit'];
 
     public function ana_baslik(){
         return $this->hasOne('App\Anabaslik', 'id', 'ana_baslik');

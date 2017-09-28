@@ -89,8 +89,23 @@ class HomePostController extends HomeController
                 return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Silme işlemi başarısız..!', 'hata' => $e]);
             }
         }
-        elseif($durum == 'gizle'){
-
+        else if($durum == 'gizle'){
+            try {
+                ForumKonu::where('id', $request->id)->update(['goster' => '0']);
+                return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Gizleme işlemi başarılı.']);
+            }
+            catch (\Exception $e){
+                return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Gizleme işlemi başarısız..!', 'hata' => $e]);
+            }
+        }
+        else if($durum == 'goster'){
+            try {
+                ForumKonu::where('id', $request->id)->update(['goster' => '1']);
+                return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Gösterme işlemi başarılı.']);
+            }
+            catch (\Exception $e){
+                return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Gösterme işlemi başarısız..!', 'hata' => $e]);
+            }
         }
     }
 

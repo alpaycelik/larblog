@@ -30,7 +30,7 @@
                                 <p style="margin: 0 0 10px; padding-left:30px;">{{ $anabaslik->kisa_aciklama }}</p>
                                 <hr style="margin:5px 0; background-image: linear-gradient(to right, transparent, #337ab7, transparent);">
                                 @foreach($anabaslik->forumkonu->take('4') as $konu)
-                                    <article class="post post-large" style="margin-bottom: 0px;">
+                                    <article id="konu-{{ $konu->id }}" class="post post-large" style="margin-bottom: 0px;">
                                         <div class="post-content">
                                             <div class="post-date">
                                                 @php(setlocale(LC_TIME, "turkish"))
@@ -46,8 +46,12 @@
                                                             @foreach($etiketler as $etiket)
                                                                 <a href="/forum/etiket/{{ str_slug($etiket) }}">{{ $etiket }}</a>
                                                             @endforeach
-                                    </span>
+                                                </span>
                                                 <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
+                                                @if(Auth::check() && Auth::user()->yetki() > 0)
+                                                    <span><i class="fa fa-trash" aria-hidden="true"></i> <a href="#" onclick="konusil('sil', '{{ $konu->id }}')">Konuyu Sil</a></span>
+                                                    <span><i class="fa fa-eye" aria-hidden="true"></i> <a href="#">Konuyu Gizle / Göster</a></span>
+                                                @endif
                                             </div>
                                         </div>
                                     </article>
@@ -70,8 +74,53 @@
     </div>
 @endsection
 @section('js')
-    
+    <script src="/js/jquery.form.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
+    <script src="/js/messages_tr.min.js"></script>
+    <script src="/js/sweetalert2.min.js"></script>
+    <script>
+        function konusil(durum, id){
+            swal({
+                title: 'Silmek istediğinizden emin misiniz?',
+                text: 'Sidiğinizde geri dönüşümü olmayacaktır',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'İptal',
+                confirmButtonColor: '#f44336',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Evet, Sil'
+            }).then(function () {
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    type: "post",
+                    url: '/forum/konu-sil',
+                    data: {
+                        'id': id,
+                        'durum' : durum,
+                        '_token': CSRF_TOKEN
+                    },
+                    beforeSubmit:function () {
+                        swal({
+                            title: '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span>',
+                            text: 'Yükleniyor lütfen bekleyiniz...',
+                            showConfirmButton: false
+                        })
+                    },
+                    success: function(response){
+                        if(response.durum == 'success'){
+                            $("#konu-"+id).slideUp();
+                        }
+                        /* swal(
+                            response.baslik,
+                            response.icerik,
+                            response.durum
+                        ); */
+                    }
+                })
+            })
+        }
+    </script>
 @endsection
 @section('css')
-    
+    <link rel="stylesheet" href="/css/sweetalert2.min.css">
 @endsection

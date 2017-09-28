@@ -74,7 +74,8 @@
 
                                 <ul class="comments">
                                     <li id="yorumlar"></li>
-                                    @foreach($forum->yorumlar->where('ust_yorum', '0') as $yorum)
+                                    @php($yorumlar = $forum->yorumlar()->where('ust_yorum', '0')->paginate(3))
+                                    @foreach($yorumlar as $yorum)
                                     <li>
                                         <div class="comment">
                                             <div class="img-thumbnail">
@@ -100,6 +101,7 @@
                                         </div>
 
                                         <ul class="comments reply">
+                                            <li id="altyorum"></li>
                                             @foreach($yorum->children as $altyorum)
                                             <li>
                                                 <div class="comment">
@@ -126,6 +128,7 @@
                                         </ul>
                                     </li>
                                     @endforeach
+                                    {{ $yorumlar->links() }}
                                 </ul>
                             </div>
 
@@ -133,7 +136,6 @@
                                 <h3 class="heading-primary">Yorum Yap</h3>
                                 <form action="" method="post" id="form">
                                     {{ csrf_field() }}
-                                    <div id="altyorum"></div>
                                     <div class="row">
                                         <div class="form-group">
                                             <div class="col-md-12">

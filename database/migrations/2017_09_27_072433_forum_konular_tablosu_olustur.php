@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ForumKonularTablosuEkle extends Migration
+class ForumKonularTablosuOlustur extends Migration
 {
     /**
      * Run the migrations.
@@ -15,12 +15,14 @@ class ForumKonularTablosuEkle extends Migration
     {
         Schema::create('forum_konular', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('ana_baslik');
             $table->string('baslik');
+            $table->string('slug');
             $table->longText('icerik');
             $table->integer('yazar');
             $table->string('etiketler');
-            $table->string('slug');
-            $table->integer('ana_baslik');
+            $table->integer('sabit')->default(0);
+            $table->integer('goster')->default(1);
             $table->timestamps();
         });
     }

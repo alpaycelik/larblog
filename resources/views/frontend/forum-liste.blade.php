@@ -23,7 +23,9 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="blog-posts">
-                        @foreach($anabaslik->forumkonu as $konu)
+                        @php($konular = $anabaslik->forumkonu()->paginate(5))
+                        @foreach($konular as $konu)
+                        @if(($konu->goster == '1') ||(Auth::check() && Auth::user()->yetki() > 0))
                         <article id="konu-{{ $konu->id }}" class="post post-large" style="margin-bottom: 10px;">
                             <div class="post-content">
                                 <div class="post-date">
@@ -43,21 +45,20 @@
                                     </span>
                                     <span><i class="fa fa-comments"></i>By <a href="#">12 Comments</a></span>
                                     @if(Auth::check() && Auth::user()->yetki() > 0)
-                                    <span><i class="fa fa-trash" aria-hidden="true"></i> <a href="#" onclick="konusil('sil', '{{ $konu->id }}')">Konuyu Sil</a></span>
-                                    <span><i class="fa fa-eye" aria-hidden="true"></i> <a href="#">Konuyu Gizle / Göster</a></span>
+                                        <span><i class="fa fa-trash" aria-hidden="true"></i> <a href="#" onclick="konusil('sil', '{{ $konu->id }}')">Konuyu Sil</a></span>
+                                        @if($konu->goster == '1')
+                                            <span><i class="fa fa-eye-slash" aria-hidden="true"></i> <a href="#" onclick="konusil('gizle', '{{ $konu->id }}')">Konuyu Gizle</a></span>
+                                        @else
+                                            <span><i class="fa fa-eye" aria-hidden="true"></i> <a href="#" onclick="konusil('goster', '{{ $konu->id }}')">Konuyu Göster</a></span>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
                         </article>
+                        @endif
                         @endforeach
                     </div>
-                    <ul class="pagination pagination-lg pull-right">
-                        <li><a href="#">«</a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
+                    {{ $konular->links() }}
                 </div>
                 @include('frontend.forum-side-bar')
             </div>
@@ -69,7 +70,6 @@
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/messages_tr.min.js"></script>
     <script src="/js/sweetalert2.min.js"></script>
-
     <script>
         function konusil(durum, id){
             swal({
@@ -99,20 +99,25 @@
                         })
                     },
                     success: function(response){
-                        if(response.durum == 'success'){
+                        if(response.durum == 'success' && durum == 'sil'){
                             $("#konu-"+id).slideUp();
                         }
-                        swal(
+                        if(response.durum == 'success' && durum == 'gizle'){
+                            $("#konu-"+id).hide().fadeIn('fast');
+                        }
+                        if(response.durum == 'success' && durum == 'goster'){
+                            $("#konu-"+id).hide().fadeIn('fast');
+                        }
+                        /* swal(
                             response.baslik,
                             response.icerik,
                             response.durum
-                        );
+                        ); */
                     }
                 })
             })
         }
     </script>
-
 @endsection
 @section('css')
     <link rel="stylesheet" href="/css/sweetalert2.min.css">
