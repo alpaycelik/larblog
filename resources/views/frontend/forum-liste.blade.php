@@ -66,6 +66,7 @@
     </div>
 @endsection
 @section('js')
+    @if(Auth::check() && Auth::user()->yetki() > 0)
     <script src="/js/jquery.form.min.js"></script>
     <script src="/js/jquery.validate.min.js"></script>
     <script src="/js/messages_tr.min.js"></script>
@@ -118,6 +119,7 @@
             })
         }
     </script>
+    @endif
 @endsection
 @section('css')
     <link rel="stylesheet" href="/css/sweetalert2.min.css">

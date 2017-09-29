@@ -79,33 +79,33 @@ class HomePostController extends HomeController
     }
 
     public function post_forum_konu_sil(Request $request){
-        $durum = $request->durum;
-        if($durum == 'sil'){
-            try {
-                ForumKonu::where('id', $request->id)->delete();
-                return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Silme işlemi başarılı.']);
-            }
-            catch (\Exception $e){
-                return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Silme işlemi başarısız..!', 'hata' => $e]);
+        if (Auth::check() && Auth::user()->yetki() > 0){
+                $durum = $request->durum;
+            if ($durum == 'sil') {
+                try {
+                    ForumKonu::where('id', $request->id)->delete();
+                    return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Silme işlemi başarılı.']);
+                } catch (\Exception $e) {
+                    return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Silme işlemi başarısız..!', 'hata' => $e]);
+                }
+            } else if ($durum == 'gizle') {
+                try {
+                    ForumKonu::where('id', $request->id)->update(['goster' => '0']);
+                    return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Gizleme işlemi başarılı.']);
+                } catch (\Exception $e) {
+                    return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Gizleme işlemi başarısız..!', 'hata' => $e]);
+                }
+            } else if ($durum == 'goster') {
+                try {
+                    ForumKonu::where('id', $request->id)->update(['goster' => '1']);
+                    return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Gösterme işlemi başarılı.']);
+                } catch (\Exception $e) {
+                    return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Gösterme işlemi başarısız..!', 'hata' => $e]);
+                }
             }
         }
-        else if($durum == 'gizle'){
-            try {
-                ForumKonu::where('id', $request->id)->update(['goster' => '0']);
-                return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Gizleme işlemi başarılı.']);
-            }
-            catch (\Exception $e){
-                return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Gizleme işlemi başarısız..!', 'hata' => $e]);
-            }
-        }
-        else if($durum == 'goster'){
-            try {
-                ForumKonu::where('id', $request->id)->update(['goster' => '1']);
-                return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Gösterme işlemi başarılı.']);
-            }
-            catch (\Exception $e){
-                return response(['durum' => 'error', 'baslik' => 'Hatalı!', 'icerik' => 'Gösterme işlemi başarısız..!', 'hata' => $e]);
-            }
+        else{
+            return redirect('/login');
         }
     }
 
