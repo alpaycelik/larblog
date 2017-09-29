@@ -181,7 +181,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FormServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-
+        Kryptonit3\Counter\CounterServiceProvider::class,
     ],
 
     /*
@@ -235,7 +235,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Counter' => Kryptonit3\Counter\Facades\CounterFacade::class,
     ],
 
 ];
