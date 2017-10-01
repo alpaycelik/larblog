@@ -25,7 +25,7 @@ Route::get('/blog/etiket/{etiket}', 'HomeGetController@get_blog_etiket');
 Route::get('/blog/{slug}', 'HomeGetController@get_blog_icerik')->where('slug', '^[a-zA-Z0-9-_\/]+$');
 Route::post('/blog/{slug}', 'HomePostController@post_blog_yorum')->where('slug', '^[a-zA-Z0-9-_\/]+$');
 
-Route::group(['prefix' => 'forum'], function () {
+Route::group(['prefix' => 'forum', 'middleware' => 'Uye'], function () {
     Route::get('/', 'HomeGetController@get_forum');
     Route::get('/konu-ekle', 'HomeGetController@get_forum_konu_ekle');
     Route::post('/konu-ekle', 'HomePostController@post_forum_konu_ekle');

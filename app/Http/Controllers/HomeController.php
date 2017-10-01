@@ -30,7 +30,7 @@ class HomeController extends Controller
 
 
     public function __construct(){
-        $ayarlar = Ayarlar::all();
+        $ayarlar = Ayarlar::where('id', 1)->first();
         View::share('ayarlar', $ayarlar);
     }
 }

@@ -82,15 +82,12 @@
                             </div>
                             <nav class="header-nav-top">
                                 <ul class="nav nav-pills">
-                                    <li class="hidden-xs">
-                                        <a href="about-us.html"><i class="fa fa-angle-right"></i> About Us</a>
-                                    </li>
-                                    <li class="hidden-xs">
-                                        <a href="contact-us.html"><i class="fa fa-angle-right"></i> Contact Us</a>
-                                    </li>
-                                    <li>
-                                        <span class="ws-nowrap"><i class="fa fa-phone"></i> (123) 456-789</span>
-                                    </li>
+                                    @if(Auth::check())
+                                        <li><span class="ws-nowrap"><i class="fa fa-user"></i> Hoşgeldin <strong>{{ Auth::user()->name }}</strong></span></li>
+                                        <li class="hidden-xs"><a href="/cikis-yap"><i class="fa fa-angle-right"></i> Çıkış</a></li>
+                                    @else
+                                        <li class="hidden-xs"><a href="/giris-yap"><i class="fa fa-angle-right"></i> Giriş/Kayıt</a></li>
+                                    @endif
                                 </ul>
                             </nav>
                         </div>
@@ -112,6 +109,9 @@
                                             <li class=""><a href="/forum">Forum</a></li>
                                             <li class=""><a href="/hakkimizda">Hakkımızda</a></li>
                                             <li class=""><a href="/iletisim">Bİze Ulaşin</a></li>
+                                            @if(Auth::check() && Auth::user()->yetki() > 0)
+                                            <li class=""><a href="/admin">ADMİN</a></li>
+                                            @endif
                                         </ul>
                                     </nav>
                                 </div>

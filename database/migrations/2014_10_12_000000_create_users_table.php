@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('slug');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('yetki')->nullable();
+            $table->string('yetki')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
