@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPostController extends AdminController
 {
@@ -78,6 +79,7 @@ class AdminPostController extends AdminController
         }
         $tarih = str_slug(Carbon::now());
         $slug = str_slug($request->baslik).'-'.$tarih;
+        $id = Auth::id();
         $resimler = $request->file('resimler');
         if (!empty($resimler)){
             $i = 1;
@@ -92,6 +94,8 @@ class AdminPostController extends AdminController
         try{
             // unset($request['_token']);
             $request->merge(['slug' => $slug]);
+            $request->merge(['yazar' => $id]);
+            $request->merge(['yazar' => $id]);
             Blog::create($request->all());
             return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Kayıt başarıyla yapıldı.']);
         }
