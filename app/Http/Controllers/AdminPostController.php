@@ -95,7 +95,6 @@ class AdminPostController extends AdminController
             // unset($request['_token']);
             $request->merge(['slug' => $slug]);
             $request->merge(['yazar' => $id]);
-            $request->merge(['yazar' => $id]);
             Blog::create($request->all());
             return response(['durum' => 'success', 'baslik' => 'Başarılı', 'icerik' => 'Kayıt başarıyla yapıldı.']);
         }
